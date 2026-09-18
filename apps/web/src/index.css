@@ -50,9 +50,34 @@ code, pre {
   align-items: center;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .header h1 {
   font-size: 20px;
   font-weight: 600;
+  margin: 0;
+}
+
+.header h1 .project-name {
+  color: #666;
+  font-weight: 400;
+}
+
+.back-button {
+  background: white;
+  color: #0066ff;
+  border: 1px solid #e0e0e0;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.back-button:hover {
+  background: #f5f5f5;
+  border-color: #0066ff;
 }
 
 .header-actions {

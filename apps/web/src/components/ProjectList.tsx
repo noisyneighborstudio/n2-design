@@ -37,7 +37,10 @@ export function ProjectList({ projects, onSelect, onCreate }: ProjectListProps) 
                 <li
                   key={project.id}
                   className="project-item"
-                  onClick={() => onSelect(project)}
+                  onClick={(e) => {
+                    console.log('Project item clicked:', project.name, e);
+                    onSelect(project);
+                  }}
                 >
                   <h3>{project.name}</h3>
                   {project.description && <p>{project.description}</p>}

@@ -41,16 +41,25 @@ export function App() {
 
   const handleCreateProject = async (name: string, description?: string) => {
     try {
+      console.log('Creating project:', name);
       const project = await api.createProject(name, description);
+      console.log('Project created:', project);
       setProjects([...projects, project]);
       setCurrentProject(project);
     } catch (error) {
       console.error('Failed to create project:', error);
+      alert('Failed to create project. Is the daemon running?');
     }
   };
 
   const handleSelectProject = (project: Project) => {
+    console.log('Selecting project:', project);
     setCurrentProject(project);
+  };
+
+  const handleBackToProjects = () => {
+    console.log('Going back to project list');
+    setCurrentProject(null);
   };
 
   const handleExport = async () => {
@@ -73,7 +82,21 @@ export function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>N2 Design v0.1</h1>
+        <div className="header-left">
+          {currentProject && (
+            <button
+              className="back-button"
+              onClick={handleBackToProjects}
+              title="Back to projects"
+            >
+              ← Projects
+            </button>
+          )}
+          <h1 onClick={currentProject ? handleBackToProjects : undefined} style={{ cursor: currentProject ? 'pointer' : 'default' }}>
+            N2 Design v0.1
+            {currentProject && <span className="project-name"> / {currentProject.name}</span>}
+          </h1>
+        </div>
         <div className="header-actions">
           <select
             className="cli-select"
@@ -107,7 +130,7 @@ export function App() {
           onCreate={handleCreateProject}
         />
       ) : (
-        <div className="workspace">
+        <div className="workspace" key={currentProject.id}>
           <FileList projectId={currentProject.id} />
           <ChatPanel
             project={currentProject}
