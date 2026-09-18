@@ -38,6 +38,14 @@ export function ProjectList({ projects, onSelect, onCreate }: ProjectListProps) 
                   key={project.id}
                   className="project-item"
                   onClick={() => onSelect(project)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onSelect(project);
+                    }
+                  }}
                 >
                   <h3>{project.name}</h3>
                   {project.description && <p>{project.description}</p>}
