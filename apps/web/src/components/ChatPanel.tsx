@@ -83,7 +83,7 @@ export function ChatPanel({ project, adapter }: ChatPanelProps) {
   return (
     <div className="panel">
       <div className="panel-header">Chat</div>
-      <div className="panel-content" style={{ display: 'flex', flexDirection: 'column' }}>
+      <div className="panel-content chat-panel-content">
         <div className="chat-messages">
           {messages.length === 0 && (
             <div className="empty-state">
@@ -98,25 +98,27 @@ export function ChatPanel({ project, adapter }: ChatPanelProps) {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="chat-input">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-                handleSend();
+        <div className="chat-input-container">
+          <div className="chat-input">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                  handleSend();
+                }
+              }}
+              placeholder={
+                adapter 
+                  ? "Describe what you want to build..." 
+                  : "Select a CLI adapter first"
               }
-            }}
-            placeholder={
-              adapter 
-                ? "Describe what you want to build..." 
-                : "Select a CLI adapter first"
-            }
-            disabled={isExecuting || !adapter}
-          />
-          <button onClick={handleSend} disabled={isExecuting || !adapter || !input.trim()}>
-            {isExecuting ? 'Generating...' : 'Send'}
-          </button>
+              disabled={isExecuting || !adapter}
+            />
+            <button onClick={handleSend} disabled={isExecuting || !adapter || !input.trim()}>
+              {isExecuting ? 'Generating...' : 'Send'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
