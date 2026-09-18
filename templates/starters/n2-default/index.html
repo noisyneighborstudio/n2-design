@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N2 Starter Template</title>
+  <style>
+    :root {
+      --primary: #0066FF;
+      --primary-hover: #0052CC;
+      --background: #FFFFFF;
+      --surface: #F5F5F5;
+      --border: #E0E0E0;
+      --text: #1A1A1A;
+      --text-secondary: #666666;
+      --radius: 8px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--background);
+      padding: var(--space-6);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--space-8);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: var(--space-4);
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-6);
+      margin-bottom: var(--space-4);
+      transition: box-shadow 200ms ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 200ms ease;
+    }
+
+    .button:hover {
+      background: var(--primary-hover);
+    }
+
+    .text-secondary {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>N2 Design Starter</h1>
+      <p class="text-secondary">
+        A clean, functional starting point for your prototype
+      </p>
+    </header>
+
+    <main>
+      <div class="card">
+        <h2>Welcome to N2 Design</h2>
+        <p>
+          This starter template follows the N2 Design system principles:
+          clarity, function, and consistency.
+        </p>
+        <p style="margin-top: 16px;">
+          <button class="button">Get Started</button>
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Feature One</h3>
+          <p class="text-secondary">
+            Build something meaningful with thoughtful design
+          </p>
+        </div>
+        <div class="card">
+          <h3>Feature Two</h3>
+          <p class="text-secondary">
+            Less decoration, more function
+          </p>
+        </div>
+        <div class="card">
+          <h3>Feature Three</h3>
+          <p class="text-secondary">
+            Real solutions for real users
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
