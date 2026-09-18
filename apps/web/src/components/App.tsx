@@ -41,9 +41,7 @@ export function App() {
 
   const handleCreateProject = async (name: string, description?: string) => {
     try {
-      console.log('Creating project:', name);
       const project = await api.createProject(name, description);
-      console.log('Project created:', project);
       setProjects([...projects, project]);
       setCurrentProject(project);
     } catch (error) {
@@ -53,12 +51,10 @@ export function App() {
   };
 
   const handleSelectProject = (project: Project) => {
-    console.log('Selecting project:', project);
     setCurrentProject(project);
   };
 
   const handleBackToProjects = () => {
-    console.log('Going back to project list');
     setCurrentProject(null);
   };
 
