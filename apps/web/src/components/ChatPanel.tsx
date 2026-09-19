@@ -71,9 +71,12 @@ export function ChatPanel({ project, adapter }: ChatPanelProps) {
               } else {
                 setMessages((prev) => {
                   const updated = [...prev];
-                  const lastMessage = updated[updated.length - 1];
-                  if (lastMessage && lastMessage.id === assistantMessageId) {
-                    lastMessage.content += data.data;
+                  const lastIndex = updated.length - 1;
+                  if (updated[lastIndex]?.id === assistantMessageId) {
+                    updated[lastIndex] = {
+                      ...updated[lastIndex],
+                      content: updated[lastIndex].content + data.data
+                    };
                   }
                   return updated;
                 });
