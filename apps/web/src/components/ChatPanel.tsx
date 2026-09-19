@@ -43,6 +43,9 @@ export function ChatPanel({ project, adapter }: ChatPanelProps) {
 
       if (!reader) throw new Error('No response body');
 
+      const assistantMessageId = Date.now().toString();
+      let isFirstChunk = true;
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -56,13 +59,28 @@ export function ChatPanel({ project, adapter }: ChatPanelProps) {
             const data = JSON.parse(line.slice(6));
             
             if (data.data) {
-              const systemMessage: ChatMessage = {
-                id: Date.now().toString() + Math.random(),
-                role: 'assistant',
-                content: data.data,
-                timestamp: new Date()
-              };
-              setMessages((prev) => [...prev, systemMessage]);
+              if (isFirstChunk) {
+                const assistantMessage: ChatMessage = {
+                  id: assistantMessageId,
+                  role: 'assistant',
+                  content: data.data,
+                  timestamp: new Date()
+                };
+                setMessages((prev) => [...prev, assistantMessage]);
+                isFirstChunk = false;
+              } else {
+                setMessages((prev) => {
+                  const updated = [...prev];
+                  const lastIndex = updated.length - 1;
+                  if (updated[lastIndex]?.id === assistantMessageId) {
+                    updated[lastIndex] = {
+                      ...updated[lastIndex],
+                      content: updated[lastIndex].content + data.data
+                    };
+                  }
+                  return updated;
+                });
+              }
             }
           }
         }
